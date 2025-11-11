@@ -9,7 +9,7 @@ function About() {
     return (
         <main className="bg-gold ">
             <SEO 
-              title="About Walk Noodles - Healthy Asian Noodles Restaurant in Indirapuram"
+              title="About WalkNoodles - Healthy Asian Noodles Restaurant in Indirapuram"
               description="Discover the story behind Walk Noodles - Indirapuram's favorite healthy Asian noodles restaurant. Learn how we're transforming comfort food into guilt-free indulgence with wholesome ingredients, millet noodles, and authentic flavors."
               ogImage="/about.png"
               keywords="about Walk Noodles, healthy noodles restaurant story, Asian food Indirapuram, millet noodles, wholesome ingredients, healthy comfort food"

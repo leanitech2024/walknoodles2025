@@ -69,7 +69,7 @@ const OurVisionSection = () => {
                 className="text-[14px] sm:text-lg mt-10 font-normal text-white leading-relaxed lg:text-xl lg:mt-12 xl:text-2xl lg:text-left"
             >
               <span className="text-gold font-bold text-left">
-                <strong>Walknoodle </strong>
+                <strong>Walknoodles </strong>
               </span>
               <br className="md:hidden" /> 
               envisions leading a new wave of healthy dining—serving bold, guilt-free flavours that
