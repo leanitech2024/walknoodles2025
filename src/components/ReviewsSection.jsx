@@ -93,12 +93,12 @@ const ReviewsSection = () => {
                         >
                             {/* Review Card */}
                             <div
-                                className="bg-gold border-2 border-black flex flex-col p-6 h-72 rounded-lg 
-                                           transition-all duration-300 hover:scale-[1.05] hover:border-light-blue"
+                                className="bg-gold border-3 border-black flex flex-col p-6 h-72 rounded-lg 
+                                           transition-all duration-300 hover:scale-[1.05] "
                             >
                                 
                                 {/* Quote Icon */}
-                                <Quote className="w-8 h-8 text-dark-blue mb-4" />
+                                <Quote className="w-8 h-8 text-black mb-4" />
 
                                 {/* Review Text */}
                                 <p className="text-dark-blue text-base leading-relaxed overflow-hidden text-ellipsis h-full">
@@ -106,7 +106,7 @@ const ReviewsSection = () => {
                                 </p>
                                 
                                 {/* Author Title - Now uses the specific title from reviewsData */}
-                                <div className="mt-4 pt-2 border-t border-dark-blue/20">
+                                <div className="mt-4 pt-2 border-t border-black/20">
                                     <p className="text-sm font-semibold text-light-blue">{review.customerTitle}</p>
                                 </div>
                             </div>

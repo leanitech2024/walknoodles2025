@@ -10,8 +10,7 @@ const FullWidthFolderShape = () => {
     <div className="w-full relative z-30">
       <div className="max-w-6xl mx-auto"> 
         
-        {/* StoryTitle Container - Unified and placed high above the clipped div */}
-        {/* FIX: Increased z-index to z-50 to ensure it is above the clipped area */}
+       
         <div className="absolute -top-12 left-1/2 -translate-x-1/2 z-50">
             <StoryTitle />
         </div>
