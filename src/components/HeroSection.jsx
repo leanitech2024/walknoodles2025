@@ -63,14 +63,14 @@ const HeroSection = () => {
 
           {/* Enquire Button */}
           <motion.div
-            className="absolute top-60 left-6 md:left-10 lg:relative lg:top-0 lg:left-0 lg:mt-6"
+            className="absolute top-60 lg:hidden left-6 md:left-10 lg:relative lg:top-0 lg:left-0 lg:mt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
           >
             <Link
               to="/contact"
-              className="inline-block px-4 py-2 bg-light-blue text-gold text-xl font-semibold rounded-full hover:bg-dark-blue transition border border-black duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold lg:px-8 lg:py-2.5 lg:text-xl"
+              className="inline-block px-4 py-2 bg-light-blue  text-gold text-xl font-semibold rounded-full hover:bg-dark-blue transition border border-black duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold lg:px-8 lg:py-2.5 lg:text-xl"
             >
               Enquire Now
             </Link>
