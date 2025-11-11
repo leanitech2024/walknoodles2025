@@ -1,6 +1,7 @@
 import { Facebook, Instagram, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { BsWhatsapp } from "react-icons/bs";
 
 const HeroSection = () => {
   return (
@@ -94,13 +95,13 @@ const HeroSection = () => {
               <Facebook className="w-8 h-8" aria-hidden="true" />
             </a>
             <a 
-              href="https://wa.me/91XXXXXXXXXX" 
+              href="https://wa.me/918448277676" 
               target="_blank" 
               rel="noopener noreferrer"
               className="w-8 h-8 text-dark-blue hover:text-light-blue cursor-pointer transition duration-200 focus:outline-none focus:ring-2 focus:ring-gold rounded lg:w-8 lg:h-8"
               aria-label="Message Walk Noodles on WhatsApp"
             >
-              <MessageCircle className="w-8 h-8" aria-hidden="true" />
+              <BsWhatsapp className="w-8 h-8" aria-hidden="true" />
             </a>
             <a 
               href="https://www.instagram.com/walknoodles/" 
