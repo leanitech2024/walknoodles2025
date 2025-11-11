@@ -62,7 +62,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Enquire Button */}
-          <motion.div
+         {/*  <motion.div
             className="absolute top-60 lg:hidden left-6 md:left-10 lg:relative lg:top-0 lg:left-0 lg:mt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ const HeroSection = () => {
             >
               Enquire Now
             </Link>
-          </motion.div>
+          </motion.div> */}
 
           {/* Social Icons */}
           <motion.nav
