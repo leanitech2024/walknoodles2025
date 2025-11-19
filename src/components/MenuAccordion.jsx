@@ -1,12 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FULL_MENU_DATA, CUSTOM_CHOICES, COMBO_ITEM } from '../assets/MenuData';
+// NOTE: Ensure these imports path is correct for your project
+import { FULL_MENU_DATA, CUSTOM_CHOICES, COMBO_ITEM } from '../assets/MenuData'; 
 import MenuFilters from './MenuFilters'
 import MenuItemAccordion from './MenuItemAccordion';
 
+// Helper function to get the ID of the first item in a category
 const getFirstItemId = (category) => {
     if (category === 'all') {
-        return FULL_MENU_DATA.noodles.items[0]?.id || null;
+        // Find the first item in a default category when 'all' is selected
+        return FULL_MENU_DATA.noodles?.items[0]?.id || null;
     }
     return FULL_MENU_DATA[category]?.items[0]?.id || null;
 }
@@ -16,6 +19,7 @@ const MenuAccordion = () => {
     const [openItemId, setOpenItemId] = useState(getFirstItemId('all'));
     const [activeType, setActiveType] = useState('all');
 
+    // Effect to reset the open item when the category changes
     useEffect(() => {
         const firstId = getFirstItemId(activeCategory);
         setOpenItemId(firstId);
@@ -23,15 +27,17 @@ const MenuAccordion = () => {
 
     const toggleItem = (id) => setOpenItemId(openItemId === id ? null : id);
 
+    // Memoized filter logic for performance
     const filteredMenu = useMemo(() => {
         let itemsToFilter = [];
 
         if (activeCategory === 'all') {
+            // Combine items from all main categories
             itemsToFilter = [
-                ...FULL_MENU_DATA.noodles.items,
-                ...FULL_MENU_DATA.ramen.items,
-                ...FULL_MENU_DATA.broths.items,
-                ...FULL_MENU_DATA.small_plates.items
+                ...(FULL_MENU_DATA.noodles?.items || []),
+                ...(FULL_MENU_DATA.ramen?.items || []),
+                ...(FULL_MENU_DATA.broths?.items || []),
+                ...(FULL_MENU_DATA.small_plates?.items || [])
             ];
         } else {
             const currentCategory = FULL_MENU_DATA[activeCategory];
@@ -40,6 +46,7 @@ const MenuAccordion = () => {
             }
         }
 
+        // Apply veg/non-veg filter
         return itemsToFilter.filter(item => {
             if (activeType === 'all') return true;
             if (activeType === 'veg') return item.type === 'veg' || item.type === 'veg_nonveg';
@@ -48,8 +55,8 @@ const MenuAccordion = () => {
         });
     }, [activeCategory, activeType]);
 
+    // Price is hidden as requested in the original code
     const getPriceString = (item) => {
-        // Hiding the price for now, returning an empty string
         return '';
     };
     
@@ -57,6 +64,7 @@ const MenuAccordion = () => {
         ? "All Main Dishes" 
         : FULL_MENU_DATA[activeCategory]?.name;
         
+    // Logic for showing 'Combos' and 'Custom Choices'
     const showExtras = ['all', 'noodles', 'ramen', 'broths'].includes(activeCategory);
 
     return (
@@ -74,6 +82,7 @@ const MenuAccordion = () => {
                     </div>
                 </div>
 
+                {/* --- Menu Filters Component --- */}
                 <MenuFilters 
                     activeCategory={activeCategory} 
                     setActiveCategory={setActiveCategory}
@@ -85,6 +94,7 @@ const MenuAccordion = () => {
                     {currentCategoryName}
                 </h3>
 
+                {/* --- Accordion Menu Items --- */}
                 <div className="space-y-3">
                     {filteredMenu.length > 0 ? (
                         filteredMenu.map((item) => (
@@ -93,6 +103,7 @@ const MenuAccordion = () => {
                                 item={item}
                                 openItemId={openItemId}
                                 toggleItem={toggleItem}
+                                // Pass the function to hide the price
                                 getPriceString={() => getPriceString(item)} 
                             />
                         ))
@@ -103,12 +114,12 @@ const MenuAccordion = () => {
                     )}
                 </div>
 
+                {/* --- Combos Section --- */}
                 {showExtras && (
                     <motion.div layout className="mt-8">
                         <h3 className="text-2xl mb-4 font-bold font-museo text-light-blue text-center">
                             Combos
                         </h3>
-                        {/* Hiding prices for combos */}
                         <div className="p-5 bg-yellow-100 border border-gold rounded-xl shadow-md">
                             <h4 className="text-xl font-extrabold text-light-blue mb-1">{COMBO_ITEM.name}</h4>
                             <p className="text-sm text-dark-blue mb-3">{COMBO_ITEM.description}</p>
@@ -120,6 +131,7 @@ const MenuAccordion = () => {
                     </motion.div>
                 )}
                 
+                {/* --- Custom Choices Section --- */}
                 {showExtras && (
                     <motion.div layout className="mt-8 space-y-4">
                         <h3 className="text-2xl mb-4 font-bold font-museo text-light-blue text-center">

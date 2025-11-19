@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react'; // <-- Added useState
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,14 +16,16 @@ const getTypeTag = (item) => {
 
 const MenuItemAccordion = ({ item, openItemId, toggleItem, getPriceString }) => {
     const isOpen = openItemId === item.id;
+    // New state to track image loading status for smooth transition
+    const [imageLoaded, setImageLoaded] = useState(false); 
 
-    // ⭐️ Smooth Transition Object
+    // Smooth Transition Object
     const smoothEaseTransition = {
         duration: 0.5,
         ease: "easeInOut"
     };
 
-    // ⭐️ Icon Rotation Variants
+    // Icon Rotation Variants
     const iconVariants = {
         open: { rotate: 180 },
         closed: { rotate: 0 }
@@ -46,6 +48,7 @@ const MenuItemAccordion = ({ item, openItemId, toggleItem, getPriceString }) => 
                 aria-controls={`menu-item-${item.id}`}
                 aria-label={`${isOpen ? 'Close' : 'Open'} ${item.name} details`}
             >
+                {/* Only show the minimized header when closed */}
                 {!isOpen && (
                     <div className="flex justify-between items-center font-bold">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-3 space-y-1 sm:space-y-0 max-w-[70%]">
@@ -53,7 +56,7 @@ const MenuItemAccordion = ({ item, openItemId, toggleItem, getPriceString }) => 
                             <div className="shrink-0">{getTypeTag(item)}</div>
                         </div>
 
-                        {/* ⭐️ Animated Chevron Icon */}
+                        {/* Animated Chevron Icon */}
                         <div className="flex items-center space-x-3 shrink-0">
                             <motion.div
                                 variants={iconVariants}
@@ -72,7 +75,7 @@ const MenuItemAccordion = ({ item, openItemId, toggleItem, getPriceString }) => 
                     <motion.div
                         key="content"
                         id={`menu-item-${item.id}`}
-                        initial={{ opacity: 0, y: -20, height: 0 }} // opens from top
+                        initial={{ opacity: 0, y: -20, height: 0 }}
                         animate={{ opacity: 1, y: 0, height: "auto" }}
                         exit={{ opacity: 0, y: -20, height: 0 }}
                         transition={smoothEaseTransition} 
@@ -81,20 +84,33 @@ const MenuItemAccordion = ({ item, openItemId, toggleItem, getPriceString }) => 
                         aria-labelledby={`menu-item-button-${item.id}`}
                     >
                         <div className="flex items-stretch h-full">
-                            <div className="w-2/5 relative overflow-hidden bg-gray-200 flex items-center justify-center text-gray-500 text-xs">
+                            {/* --- Image Section with Placeholder --- */}
+                            <div className="w-2/5 relative overflow-hidden flex items-center justify-center">
+                               
+                                {!imageLoaded && (
+                                    <div className="absolute inset-0 bg-gray-300 animate-pulse"></div>
+                                )}
+                                
                                 <img
                                     src={item.image}
                                     alt={`${item.name} - ${item.description}`}
-                                    className="w-full h-full object-cover block"
-                                    loading="lazy"
+                                    className={`w-full h-full object-cover block transition-opacity duration-500`}
+                                    
+                                    loading="eager" 
+                                   
+                                    onLoad={() => setImageLoaded(true)} 
+                                    style={{ opacity: imageLoaded ? 1 : 0 }} 
                                 />
                             </div>
 
+                            {/* --- Details Section --- */}
                             <div className="flex-1 p-5 flex flex-col justify-center">
                                 <div className="flex justify-between items-center mb-1">
                                     <h4 className="text-xl font-extrabold text-light-blue">
                                         {item.name}
                                     </h4>
+                                    {/* Price is still hidden */}
+                                    {getPriceString(item) && <span className="text-lg font-bold text-dark-blue">{getPriceString(item)}</span>}
                                 </div>
 
                                 <p className="text-sm leading-relaxed text-dark-blue m-0 mb-3 border-b pb-2 border-gray-300">
