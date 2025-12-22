@@ -50,7 +50,7 @@ const Header = () => {
           {/* Logo */}
           <div className="shrink-0">
             <Link to="/">
-              <img className="h-20 w-auto" src="/logo-big.png" alt="Walk-N-Noodles Logo" />
+              <img className="h-14  max-w-50" src="/logo.png" alt="Walk-N-Noodles Logo" />
             </Link>
           </div>
 
